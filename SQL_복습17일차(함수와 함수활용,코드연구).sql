@@ -1,6 +1,6 @@
---ÀúÀåÇÔ¼ö--
+--ì €ì¥í•¨ìˆ˜--
 
---¼­¹ö onÀ¸·Î ¿­¾îÁÖ±â--
+--ì„œë²„ onìœ¼ë¡œ ì—´ì–´ì£¼ê¸°--
 set serveroutput on;
 show serveroutput;
 
@@ -16,13 +16,13 @@ return v_no;
 end;
 /
 
---ÇÔ¼ö ½ÇÇà--
+--í•¨ìˆ˜ ì‹¤í–‰--
 
---select¹®À¸·Î È£Ãâ--
+--selectë¬¸ìœ¼ë¡œ í˜¸ì¶œ--
 select func_test1(10) from dual;
 select func_test1(2) from dual;
 
---ÀÍ¸íÇÁ·Î½ÃÀú·Î È£Ãâ--
+--ìµëª…í”„ë¡œì‹œì €ë¡œ í˜¸ì¶œ--
 declare
 v_number number;
 begin
@@ -41,7 +41,7 @@ end;
 
 
 -----------------------
---ÇÔ¼ö »ı¼º ½Ç½À / exception»ç¿ëÇÏ±â--
+--í•¨ìˆ˜ ìƒì„± ì‹¤ìŠµ / exceptionì‚¬ìš©í•˜ê¸°--
 create or replace function myfunction
 (p_name varchar2)
 return varchar2
@@ -52,15 +52,15 @@ select job into v_job from emp where ename=p_name;
 return v_job;
 exception
 when no_data_found then
-return '»ç¿ëÀÚ ¾øÀ½';
+return 'ì‚¬ìš©ì ì—†ìŒ';
 end;
 /
 
---ÇÔ¼ö ½ÇÇà--
+--í•¨ìˆ˜ ì‹¤í–‰--
 select myfunction('SCOTT')from dual;
 select myfunction('KING') from dual;
 
---ÀÍ¸íÇÁ·Î½ÃÀú·Î ½ÇÇà--
+--ìµëª…í”„ë¡œì‹œì €ë¡œ ì‹¤í–‰--
 declare
 v_name varchar2(100);
 begin
@@ -69,15 +69,15 @@ dbms_output.put_line(v_name);
 end;
 /
 
---ÀÍ¸íÇÁ·Î½ÃÀú º¯¼ö ¾øÀÌ ½ÇÇà--
+--ìµëª…í”„ë¡œì‹œì € ë³€ìˆ˜ ì—†ì´ ì‹¤í–‰--
 begin
-dbms_output.put_line('SCOTT Á÷¾÷Á¤º¸: '||myfunction('SCOTT'));
-dbms_output.put_line('KING Á÷¾÷Á¤º¸: '||myfunction('KING'));
-dbms_output.put_line('JOMI Á÷¾÷Á¤º¸: '||myfunction('JOMI'));
+dbms_output.put_line('SCOTT ì§ì—…ì •ë³´: '||myfunction('SCOTT'));
+dbms_output.put_line('KING ì§ì—…ì •ë³´: '||myfunction('KING'));
+dbms_output.put_line('JOMI ì§ì—…ì •ë³´: '||myfunction('JOMI'));
 end;
 /
 
---if¹® »ç¿ëÇÏ±â--
+--ifë¬¸ ì‚¬ìš©í•˜ê¸°--
 create or replace function mymax
 (
 p_no1 number,
@@ -97,7 +97,7 @@ end;
 /
 
 
---Á¶±İ´õ °£´ÜÇÏ°Ô ÀÛ¼ºÇÏ±â--
+--ì¡°ê¸ˆë” ê°„ë‹¨í•˜ê²Œ ì‘ì„±í•˜ê¸°--
 create or replace function mymax
 (p_no1 number,
 p_no2 number)
@@ -113,17 +113,17 @@ end;
 /
 
 
---ÇÔ¼ö È£ÃâÇÏ±â--
+--í•¨ìˆ˜ í˜¸ì¶œí•˜ê¸°--
 select mymax(10,23) from dual;
 
 begin
-dbms_output.put_line('°¡ÀåÅ« ¼ö: '|| mymax(10,100));
+dbms_output.put_line('ê°€ì¥í° ìˆ˜: '|| mymax(10,100));
 end;
 /
 
 --------------------------------------
 
---ÄÚµå¿¬±¸--
+--ì½”ë“œì—°êµ¬--
 create or replace function mymax
 (
 p_no1 number,
@@ -137,15 +137,15 @@ if p_no1 > p_no2 then
 v_no := p_no1;
 end if;
 return v_no;
-exception --Æ¯Á¤ÇÑ»óÈ²À» Á¦¾îÇÏ°í½ÍÀ»¶§´Â if else¹®À¸·Î--
---´ÜÀÏif·Î ÂüÀÏ¶§¸¸ Ãâ·ÂÇÏ°Ô ÇÏ°í ±×°Ô ¾Æ´Ò°æ¿ì exceptionÀ¸·Î Ãâ·ÂÇØº¸·Á°íÇßÀ¸³ª, ½ÇÆĞ..!--
+exception --íŠ¹ì •í•œìƒí™©ì„ ì œì–´í•˜ê³ ì‹¶ì„ë•ŒëŠ” if elseë¬¸ìœ¼ë¡œ--
+--ë‹¨ì¼ifë¡œ ì°¸ì¼ë•Œë§Œ ì¶œë ¥í•˜ê²Œ í•˜ê³  ê·¸ê²Œ ì•„ë‹ê²½ìš° exceptionìœ¼ë¡œ ì¶œë ¥í•´ë³´ë ¤ê³ í–ˆìœ¼ë‚˜, ì‹¤íŒ¨..!--
 return p_no2;
 end;
 /
 
 
---2Â÷ ½Ãµµ--
-create or replace mymax
+--2ì°¨ ì‹œë„--
+create or replace function mymax
 (
 p_no1 number,
 p_no2 number
@@ -162,21 +162,21 @@ end if;
 return v_number;
 exception
 when others then
-return '¼ıÀÚ°¡ °°½À´Ï´Ù'; --return°ªÀÌ number·Î ÁöÁ¤µÇ¾îÀÖ¾î¼­ ½ÇÆĞ..!--
+return 'ìˆ«ìê°€ ê°™ìŠµë‹ˆë‹¤'; --returnê°’ì´ numberë¡œ ì§€ì •ë˜ì–´ìˆì–´ì„œ ì‹¤íŒ¨..!--
 end;
 /
-/*ÀÌ¹ø¿¡´Â if¹®À¸·Î °ªÀ» ¿Ã¹Ù¸£°Ô Ãâ·ÂÇÑ´ÙÀ½¿¡ ¸¸¾à µ¿Á¡ÀÎ°É ÀÔ·ÂÇÑ°æ¿ì
-µ¿Á¡ÀÌ¶ó°í Ãâ·ÂµÇ´Â ·ÎÁ÷À» ±¸¼ºÇÏ°í½Í¾úÀ¸³ª returnÀÇ Á¤ÀÇ¸¦ numberÅ¸ÀÔÀ¸·Î Á¤ÀÇÇØ¼­ ¾ÈµÊ..*/
+/*ì´ë²ˆì—ëŠ” ifë¬¸ìœ¼ë¡œ ê°’ì„ ì˜¬ë°”ë¥´ê²Œ ì¶œë ¥í•œë‹¤ìŒì— ë§Œì•½ ë™ì ì¸ê±¸ ì…ë ¥í•œê²½ìš°
+ë™ì ì´ë¼ê³  ì¶œë ¥ë˜ëŠ” ë¡œì§ì„ êµ¬ì„±í•˜ê³ ì‹¶ì—ˆìœ¼ë‚˜ returnì˜ ì •ì˜ë¥¼ numberíƒ€ì…ìœ¼ë¡œ ì •ì˜í•´ì„œ ì•ˆë¨..*/
 
 
 
---3Â÷½Ãµµ--
+--3ì°¨ì‹œë„--
 create or replace function mymax
 (
 p_no1 number,
 p_no2 number
 )
-return varchar2 --¸®ÅÏ°ª ÀÚÃ¼¸¦ ¹®ÀÚ·Î Á¤ÀÇÇØº½--
+return varchar2 --ë¦¬í„´ê°’ ìì²´ë¥¼ ë¬¸ìë¡œ ì •ì˜í•´ë´„--
 as
 v_number number;
 begin
@@ -185,12 +185,12 @@ v_number := p_no1;
 else
 v_number := p_no2;
 end if;
-return to_char(v_number); --¼ıÀÚ´Ùº¸´Ï ¸®ÅÏ°ªÀ» ¹®ÀÚ·Î Ãâ·ÂÇÏ°í--
+return to_char(v_number); --ìˆ«ìë‹¤ë³´ë‹ˆ ë¦¬í„´ê°’ì„ ë¬¸ìë¡œ ì¶œë ¥í•˜ê³ --
 exception
 when others then
-return 'µ¿Á¡ÀÔ´Ï´Ù'; --µÎ°³ÀÇ ¼ö°¡ °°À» °æ¿ì µ¿Á¡ÀÌ¶ó°í Ãâ·ÂÇÏ´Â ¿¹¿Ü¹®!--
+return 'ë™ì ì…ë‹ˆë‹¤'; --ë‘ê°œì˜ ìˆ˜ê°€ ê°™ì„ ê²½ìš° ë™ì ì´ë¼ê³  ì¶œë ¥í•˜ëŠ” ì˜ˆì™¸ë¬¸!--
 end;
 /
---ÄÄÆÄÀÏÀº µÇ¾úÀ¸³ª, µ¿Á¡À¸·Î °ªÀ» ÁáÀ»°æ¿ì ¿¹¿Ü¹®ÀÌ Ãâ·ÂµÇÁö ¾ÊÀ½--
---ÀÌ ºÎºĞ Á¶±İ´õ ¿¬±¸ ÇÊ¿ä..! ±×·¡µµ ÇÔ¼ö°¡ ¿À·ù³ªÁö ¾Ê°í ÄÄÆÄÀÏ µÊ--
+--ì»´íŒŒì¼ì€ ë˜ì—ˆìœ¼ë‚˜, ë™ì ìœ¼ë¡œ ê°’ì„ ì¤¬ì„ê²½ìš° ì˜ˆì™¸ë¬¸ì´ ì¶œë ¥ë˜ì§€ ì•ŠìŒ--
+--ì´ ë¶€ë¶„ ì¡°ê¸ˆë” ì—°êµ¬ í•„ìš”..! ê·¸ë˜ë„ í•¨ìˆ˜ê°€ ì˜¤ë¥˜ë‚˜ì§€ ì•Šê³  ì»´íŒŒì¼ ë¨--
 
